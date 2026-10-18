@@ -34,6 +34,11 @@
   <p>The hard part was not Mongo. It was code that looked finished and was not. The login route, the JWT middleware, and the user methods were all present in different files and did not connect. Registering the model before the methods meant <code>setPassword</code> could be missing at runtime. Leaving reads public and locking writes was the trade-off I wanted to show. A public trip list is the product. An open POST is not.</p>
 
   <h2>Source</h2>
-  <p><a href="https://github.com/comprodigy/cs465-fullstack">github.com/comprodigy/cs465-fullstack</a> — enhanced work is on the capstone branch off <code>module7</code>.</p>
+<p>
+  <a href="https://github.com/comprodigy/cs465-fullstack/tree/module7">Original (module7)</a>
+  ·
+  <a href="https://github.com/comprodigy/cs465-fullstack/tree/cs499-db-enhancement">Enhanced (cs499-db-enhancement)</a>
+</p>
+<p>Original had the trip schema and CRUD, but login and JWT were not connected. Enhanced finishes auth, locks writes to admin, makes trip code unique, and adds the resort report.</p>
 </body>
 </html>

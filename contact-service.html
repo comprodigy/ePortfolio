@@ -37,7 +37,12 @@
   <p>A good structure does not fix a bad uniqueness algorithm. The file already had a HashMap. The real issue was generating IDs in the model with no view of the collection. Moving that into the service and checking <code>containsKey</code> is the difference between “probably unique” and “unique in this store.” The second index made the trade-off concrete: one map is enough if you only look up by ID. Get-by-phone without scanning values costs another map and extra write work.</p>
   <p>The tests were the annoying part. <code>testAddContact</code> never added a contact. Changing <code>addContact</code> to take fields meant rewriting tests. That was the right break. I would rather change the API than leave uniqueness inside <code>Contact</code>.</p>
 
-  <h2>Source</h2>
-  <p>Add the GitHub link to the Contact service repo here. Keep original and enhanced on separate branches or folders.</p>
+<h2>Source</h2>
+<p>
+  <a href="https://github.com/comprodigy/SoftwareAutomation/tree/main">Original (main)</a>
+  ·
+  <a href="https://github.com/comprodigy/SoftwareAutomation/tree/ePortfolio">Enhanced (ePortfolio)</a>
+</p>
+<p>Original already used a HashMap. Enhanced moves ID generation into the service, adds a phone index, and rewrites the tests so they call the service.</p>
 </body>
 </html>
