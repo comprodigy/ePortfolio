@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CompuStocker — Shaun Walsh</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="code-review.html">Code review</a>
+    <a href="compustocker.html">CompuStocker</a>
+    <a href="contact-service.html">Contact service</a>
+    <a href="travlr.html">Travlr</a>
+  </nav>
+
+  <h1>CompuStocker</h1>
+  <p>CS 360 Mobile Architecture and Programming. Android inventory app for computer parts. Enhanced for software design and engineering.</p>
+
+  <h2>What it was</h2>
+  <p>Login and register, a grid of parts, add and delete, optional SMS permission. SQLite on the device. Activities talked to the database directly. Passwords were stored and compared in plaintext. Minimum quantity was set in Java and not stored.</p>
+
+  <h2>What changed</h2>
+  <ul>
+    <li>ViewModel and repository. The Activity binds the UI.</li>
+    <li>Salt and SHA-256 hash. Lookup by username, then verify the hash.</li>
+    <li>Session with a 30-minute timeout. Inventory redirects if the session is empty.</li>
+    <li>min_quantity column written on insert and read on load.</li>
+  </ul>
+
+  <h2>Narrative</h2>
+  <p>I picked this artifact because it was the first full project in the degree that I enjoyed, and I already had mobile experience. The enhancement shows I can take a working class app and fix the design the way a team would, not add another screen. The hard part was moving work out of the Activity so the RecyclerView still updated. Password hashing was new to me on Android. Outcomes 2, 4, and 5.</p>
+
+  <h2>Source</h2>
+  <p>Add the GitHub repo link here. Keep original and enhanced on separate branches or folders so a reviewer can see both.</p>
+</body>
+</html>

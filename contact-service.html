@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Contact service — Shaun Walsh</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="code-review.html">Code review</a>
+    <a href="compustocker.html">CompuStocker</a>
+    <a href="contact-service.html">Contact service</a>
+    <a href="travlr.html">Travlr</a>
+  </nav>
+
+  <h1>Grand Strand Contact Service</h1>
+  <p>CS 320 Software Testing, Automation, and QA. In-memory contact store with no UI. Enhanced for algorithms and data structures. Outcomes 3 and 4.</p>
+
+  <h2>What it was</h2>
+  <p>A contact has an ID, first name, last name, phone, and address, with length and format rules. <code>ContactService</code> supports add, update, delete, and lookup. JUnit covers the field rules and the service methods.</p>
+  <p>The original code already used a <code>HashMap</code> keyed by ID, so lookup by ID was already average O(1). IDs were random 10-letter strings created inside <code>Contact</code>. Uniqueness was only checked if the same object was added twice. <code>updateContact</code> skipped invalid fields instead of throwing. <code>getContact</code> returned null while delete and update threw. <code>testAddContact</code> never called <code>addContact</code>, and <code>testGetContact</code> still had a generated <code>fail</code> stub.</p>
+
+  <h2>What changed</h2>
+  <ul>
+    <li>Named constants for field limits.</li>
+    <li>The service owns ID generation and retries while <code>contacts.containsKey(id)</code>.</li>
+    <li><code>Contact</code> takes the ID in the constructor and stores it as final. Still no ID setter.</li>
+    <li><code>updateContact</code> calls the setters so bad data throws.</li>
+    <li>Missing IDs throw on get, update, and delete.</li>
+    <li>A second <code>HashMap</code> maps phone to ID for average O(1) lookup by phone. Extra memory, and both maps stay in sync. That trade-off is in the class comment.</li>
+    <li>Tests hit the service, including duplicate phone, invalid update, get-by-phone, and lookup after 200 contacts.</li>
+  </ul>
+
+  <h2>Narrative</h2>
+  <p>I picked this artifact because it is small enough to show a structure choice and a trade-off without a UI in the way. CS 320 was also where I learned to prove behavior with JUnit. I did not need to swap a list for a map. I needed to make the algorithm around the map honest.</p>
+  <p>A good structure does not fix a bad uniqueness algorithm. The file already had a HashMap. The real issue was generating IDs in the model with no view of the collection. Moving that into the service and checking <code>containsKey</code> is the difference between “probably unique” and “unique in this store.” The second index made the trade-off concrete: one map is enough if you only look up by ID. Get-by-phone without scanning values costs another map and extra write work.</p>
+  <p>The tests were the annoying part. <code>testAddContact</code> never added a contact. Changing <code>addContact</code> to take fields meant rewriting tests. That was the right break. I would rather change the API than leave uniqueness inside <code>Contact</code>.</p>
+
+  <h2>Source</h2>
+  <p>Add the GitHub link to the Contact service repo here. Keep original and enhanced on separate branches or folders.</p>
+</body>
+</html>

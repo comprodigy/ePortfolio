@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Code review — Shaun Walsh</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="code-review.html">Code review</a>
+    <a href="compustocker.html">CompuStocker</a>
+    <a href="contact-service.html">Contact service</a>
+    <a href="travlr.html">Travlr</a>
+  </nav>
+
+  <h1>Informal code review</h1>
+  <p>CS 499 Milestone One. Walkthrough of the three original artifacts before the enhancements: what each program did, checklist findings, and the planned changes. Audience is a peer or a manager, not a line-by-line audit.</p>
+
+  <iframe
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/bHePLG5j8EY"
+    title="CS 499 code review"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+
+  <p><a href="https://youtu.be/bHePLG5j8EY">Open the video on YouTube</a></p>
+
+  <h2>What the video covers</h2>
+  <ul>
+    <li>CompuStocker: Activities owning data access, plaintext login, minimum quantity not stored.</li>
+    <li>Contact service: HashMap already in place, random IDs with no live uniqueness check, tests that never hit the service.</li>
+    <li>Travlr: trip schema and CRUD present, login route and JWT middleware not connected, no staff report.</li>
+  </ul>
+
+  <h2>Outcomes planned across the three enhancements</h2>
+  <ul>
+    <li>1 — Travlr resort aggregation for a non-developer audience.</li>
+    <li>2 — This video, the site, and the narratives.</li>
+    <li>3 — Contact HashMap, generate-and-check IDs, phone index trade-off.</li>
+    <li>4 — Android ViewModel and SQLite, JUnit, Mongoose and REST.</li>
+    <li>5 — Hashed login and session on CompuStocker; admin-only writes on Travlr.</li>
+  </ul>
+</body>
+</html>

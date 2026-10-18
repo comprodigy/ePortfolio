@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Travlr — Shaun Walsh</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="code-review.html">Code review</a>
+    <a href="compustocker.html">CompuStocker</a>
+    <a href="contact-service.html">Contact service</a>
+    <a href="travlr.html">Travlr</a>
+  </nav>
+
+  <h1>Travlr Getaways</h1>
+  <p>CS 465 Client/Server Development. MEAN stack trip app. Enhanced for databases. Outcomes 1, 4, and 5.</p>
+
+  <h2>What it was</h2>
+  <p>The customer site lists trips. An Angular admin app was meant to add and update them through an Express API backed by MongoDB. I did not finish the security chapter. On the <code>module7</code> branch the trip schema, trip reads and writes, a user model, and a Passport strategy existed. Login was wired in the router but not implemented. <code>authenticateJWT</code> was named on POST <code>/trips</code> and never defined. The user model was registered twice, once before the password methods were attached. Failed writes returned an <code>err</code> that was never declared. Update returned 201. Trip codes were indexed but not unique.</p>
+
+  <h2>What changed</h2>
+  <ul>
+    <li>The user model is registered once, after <code>setPassword</code>, <code>validPassword</code>, and <code>generateJWT</code>. Passwords stay as hash and salt. A <code>role</code> field is admin or customer.</li>
+    <li><code>register</code> and <code>login</code> both return a JWT. Writes on trips require that token and an admin role. Reads stay public so the customer site still works.</li>
+    <li>Trip <code>code</code> is unique. <code>start</code> and <code>resort</code> are indexed.</li>
+    <li>Handlers use <code>try/catch</code>. Find-by-code is <code>findOne</code>. Update returns 200 and does not change the code.</li>
+    <li><code>GET /api/reports/trips-by-resort</code> aggregates trip counts by resort for a logged-in user.</li>
+  </ul>
+
+  <h2>Narrative</h2>
+  <p>I picked this artifact because it is the only full database project I have from the program, and the unfinished auth was an honest gap rather than something I had to invent. The enhancement stays on the data layer. I did not rebuild the Angular screens.</p>
+  <p>The hard part was not Mongo. It was code that looked finished and was not. The login route, the JWT middleware, and the user methods were all present in different files and did not connect. Registering the model before the methods meant <code>setPassword</code> could be missing at runtime. Leaving reads public and locking writes was the trade-off I wanted to show. A public trip list is the product. An open POST is not.</p>
+
+  <h2>Source</h2>
+  <p><a href="https://github.com/comprodigy/cs465-fullstack">github.com/comprodigy/cs465-fullstack</a> — enhanced work is on the capstone branch off <code>module7</code>.</p>
+</body>
+</html>
